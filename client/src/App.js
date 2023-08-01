@@ -1,17 +1,16 @@
-import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "scenes/homePage";
-import LoginPage from "scenes/loginPage";
 import ProfilePage from "scenes/profilePage";
+import AuthPage from "scenes/authPage";
 
 function App() {
-  
   return (
     <div className="app">
-      <BrowserRouter >
+      <BrowserRouter>
         <Routes>
-          <Route path="/" element={<HomePage/>} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/profile/:userId" element={<ProfilePage />}/>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/auth" element={<AuthPage />} />
+          <Route path="/profile/:userId" element={<ProfilePage />} />
         </Routes>
       </BrowserRouter>
     </div>

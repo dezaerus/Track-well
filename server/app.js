@@ -16,8 +16,8 @@ const app = express();
 app.use(morgan("dev"));
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(cors());
-app.use(express.json({ extended: true }));
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ extended: false }));
+app.use(express.urlencoded({ extended: false }));
 const PORT = process.env.PORT || 3001;
 
 /* ROUTES  */

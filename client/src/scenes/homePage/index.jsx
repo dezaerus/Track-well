@@ -4,6 +4,7 @@ import safe from "assets/safe.png";
 import users from "assets/users.png";
 import reviews from "assets/reviews.png";
 import support from "assets/24.webp";
+
 const HomePage = () => {
   const [isTopOfPage, setIsTopOfPage] = useState(true);
 
@@ -90,9 +91,7 @@ const HomePage = () => {
         </div>
       </section>
       <footer className="bg-gray-200 text-black py-4 text-center">
-        <p className="text-sm">
-          &copy; {new Date().getFullYear()} Track Well
-        </p>
+        <p className="text-sm">&copy; {new Date().getFullYear()} Track Well</p>
         <p className="text-sm">NewTown, Earthy, Marso</p>
       </footer>
     </main>

@@ -6,23 +6,25 @@ import { useNavigate } from "react-router-dom";
 const Navbar = ({ isTopOfPage }) => {
   const isNonMobileScreen = useMediaQuery("(min-width: 1060px)");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const color = isTopOfPage ? "bg-white text-black" : "bg-gray-500";
+  const color = isTopOfPage ? "bg-white text-black" : "bg-gray-300";
   const menuItems = ["Home", "About", "Login"];
   const navigate = useNavigate();
-
+ 
   const handleMenuItemClick = (item) => {
     if (item === "Login") return navigate("/auth");
     setIsMenuOpen(false);
   };
-  const handleCLick = () => {
+
+  const handleCLick = (item) => {
     navigate("/auth");
   };
+
   return (
     <div
       className={`z-40 w-full fixed top-0 py-6 ${color}  transition duration-300`}
     >
       <div className="flex justify-between items-center w-5/6 md:w-4/6 mx-auto p-4 gap-6">
-        <p className="text-3xl">Track Well</p>
+        <p className="text-2xl sm:text-3xl">Track Well</p>
         {isNonMobileScreen ? (
           <div className="flex gap-8 text-md">
             <button className="hover:text-gray-400 transition duration-150">
@@ -31,9 +33,10 @@ const Navbar = ({ isTopOfPage }) => {
             <button className="hover:text-gray-400 transition duration-150">
               About
             </button>
+
             <button
               onClick={handleCLick}
-              className="text-white py-2 px-4 rounded-lg bg-gray-600 hover:bg-gray-800 transition duration-150"
+              className="hover:bg-gray-500 transition duration-150 py-2 px-4 bg-gray-400 rounded-xl"
             >
               Login
             </button>

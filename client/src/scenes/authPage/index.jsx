@@ -33,6 +33,7 @@ const AuthPage = () => {
     if (loginResponse.ok) {
       dispatch(
         setLogin({
+          id: loggedIn.id,
           user: loggedIn.user,
           token: loggedIn.token,
         })
@@ -40,7 +41,7 @@ const AuthPage = () => {
       setIsError(false);
       setErrorMessage("");
       actions.resetForm();
-      navigate(`/profile/${loggedIn.user}`);
+      navigate(`/profile/${loggedIn.id}`);
     } else {
       const error = loggedIn.msg;
       setIsError(true);

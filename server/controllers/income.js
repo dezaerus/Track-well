@@ -45,28 +45,6 @@ export const getIncome = async (req, res) => {
   }
 };
 
-/* UPDATE */
-
-export const updateIncome = async (req, res) => {
-  try {
-    const { incomeId, amount, description, category, date } = req.body;
-
-    const updatedIncome = await Income.findByIdAndUpdate(
-      incomeId,
-      { amount, description, category, date },
-      { new: true }
-    );
-
-    if (!updatedIncome) {
-      return res.status(404).json({ message: "Income not found" });
-    }
-
-    res.status(200).json(updatedIncome);
-  } catch (error) {
-    res.status(400).json({ message: "Invalid income ID or data" });
-  }
-};
-
 /* DELETE */
 
 export const deleteIncome = async (req, res) => {

@@ -44,29 +44,6 @@ export const getExpense = async (req, res) => {
   }
 };
 
-/* UPDATE */
-
-export const updateExpense = async (req, res) => {
-  try {
-    const { expenseId } = req.params;
-    const { amount, description, category, date } = req.body;
-
-    const updatedExpense = await Expense.findByIdAndUpdate(
-      expenseId,
-      { amount, description, category, date },
-      { new: true }
-    );
-
-    if (!updatedExpense) {
-      return res.status(404).json({ message: "Expense not found" });
-    }
-
-    res.status(200).json(updatedExpense);
-  } catch (error) {
-    res.status(400).json({ message: "Invalid expense ID or data" });
-  }
-};
-
 /* DELETE */
 
 export const deleteExpense = async (req, res) => {

@@ -3,7 +3,6 @@ import {
   getExpenses,
   getExpense,
   createExpense,
-  updateExpense,
   deleteExpense,
 } from "../controllers/expense.js";
 import { verifyToken } from "../middleware/auth.js";
@@ -19,10 +18,6 @@ router.get("/", verifyToken, getExpenses);
 /* CREATE */
 
 router.post("/", verifyToken, createExpense);
-
-/* UPDATE */
-
-router.put("/:id", verifyToken, updateExpense);
 
 /* DELETE */
 

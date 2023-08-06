@@ -41,7 +41,7 @@ const AuthPage = () => {
       setIsError(false);
       setErrorMessage("");
       actions.resetForm();
-      navigate(`/profile/${loggedIn.id}`);
+      navigate(`/profile`);
     } else {
       const error = loggedIn.msg;
       setIsError(true);

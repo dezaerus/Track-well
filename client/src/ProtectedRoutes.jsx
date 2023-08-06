@@ -1,6 +1,5 @@
 import { useSelector } from "react-redux/es/hooks/useSelector";
-import { Outlet, useNavigate } from "react-router-dom";
-import ProfilePage from "scenes/profilePage";
+import { Outlet, Navigate } from "react-router-dom";
 
 const useAuth = () => {
     const user = useSelector((state) => state.id)
@@ -9,8 +8,7 @@ const useAuth = () => {
 
 const ProtectedRoutes = () => {
     const isAuth = useAuth();
-    
-  return !isAuth ? <Outlet /> : <ProfilePage />
+  return !isAuth ? <Outlet /> : <Navigate to="/profile" />;
 }
 
 export default ProtectedRoutes

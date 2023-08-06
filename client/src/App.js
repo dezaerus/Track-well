@@ -13,7 +13,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/auth" element={<AuthPage />} />
           </Route>
-          <Route path="/profile/:userId" element={<ProfilePage />} />
+          <Route path="/profile" element={<ProfilePage />} />
         </Routes>
       </BrowserRouter>
     </div>

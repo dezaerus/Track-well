@@ -31,19 +31,6 @@ export const getExpenses = async (req, res) => {
   }
 };
 
-export const getExpense = async (req, res) => {
-  try {
-    const { expenseId } = req.params;
-    const expense = await Expense.findById(expenseId);
-    if (!expense) {
-      return res.status(404).json({ message: "Expense not found" });
-    }
-    res.status(200).json(expense);
-  } catch (error) {
-    res.status(404).json({ message: "Invalid expense ID" });
-  }
-};
-
 /* DELETE */
 
 export const deleteExpense = async (req, res) => {

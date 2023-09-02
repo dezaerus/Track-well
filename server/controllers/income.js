@@ -32,18 +32,6 @@ export const getIncomes = async (req, res) => {
   }
 };
 
-export const getIncome = async (req, res) => {
-  try {
-    const { incomeId } = req.params;
-    const income = await Income.findById(incomeId);
-    if (!income) {
-      return res.status(404).json({ message: "Income not found" });
-    }
-    res.status(200).json(income);
-  } catch (error) {
-    res.status(404).json({ message: "Invalid income ID" });
-  }
-};
 
 /* DELETE */
 

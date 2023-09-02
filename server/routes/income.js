@@ -1,6 +1,5 @@
 import express from "express";
 import {
-  getIncome,
   createIncome,
   deleteIncome,
   getIncomes,
@@ -11,9 +10,9 @@ const router = express.Router();
 
 /* READ */
 
-router.get("/:id", verifyToken, getIncome);
 
-router.get("/", verifyToken, getIncomes);
+
+router.get("/:userId", verifyToken, getIncomes);
 
 /* CREATE */
 

@@ -1,23 +1,85 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BiUser, BiLogOut } from "react-icons/bi";
 import {
   AiOutlineBarChart,
-  AiFillWallet,
   AiFillMinusSquare,
   AiFillPlusSquare,
 } from "react-icons/ai";
-import { MdLocalAtm } from "react-icons/md";
-import { setLogout } from "state";
+import { setLogout, setExpenses, setIncomes } from "state";
 import { useNavigate } from "react-router-dom";
+import DashBoard from "scenes/profilePage/DashBoard";
+import Record from "scenes/profilePage/Record";
 
 const ProfilePage = () => {
+  const isDataFetched = useRef(false);
   const user = useSelector((state) => state.user);
+  const userId = useSelector((state) => state.id);
+  const [page, setPage] = useState("DashBoard");
+  const token = useSelector((state) => state.token);
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchIncomesAndExpenses = async () => {
+      try {
+        const fetchIncomeAndExpense = async (url, key) => {
+          const response = await fetch(url, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          });
+
+          if (!response.ok) {
+            throw new Error(`Failed to fetch ${key}`);
+          }
+
+          const data = await response.json();
+          dispatch(
+            key === "incomes"
+              ? setIncomes({ incomes: data })
+              : setExpenses({ expenses: data })
+          );
+        };
+
+        await Promise.all([
+          fetchIncomeAndExpense(
+            `http://localhost:3001/income/${userId}`,
+            "incomes"
+          ),
+          fetchIncomeAndExpense(
+            `http://localhost:3001/expenses/${userId}`,
+            "expenses"
+          ),
+        ]);
+
+        isDataFetched.current = true;
+        setLoading(false);
+      } catch (error) {
+        console.error(error);
+        setLoading(false);
+      }
+    };
+
+    if (!isDataFetched.current) {
+      fetchIncomesAndExpenses();
+    }
+  }, [token, userId, dispatch]);
+
   const handleLogOut = () => {
-      dispatch(setLogout())
-      navigate("/")
+    dispatch(setLogout());
+    navigate("/");
+  };
+
+  if (loading) {
+    return (
+      <div className="h-screen flex justify-center items-center bg-gray-800 text-white">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-gray-400"></div>
+      </div>
+    );
   }
 
   return (
@@ -29,41 +91,35 @@ const ProfilePage = () => {
           </i>
           <div>
             <p className="text-lg">{user}</p>
-            <p className="text-sm text-gray-400">Your money</p>
+            <p className="text-sm text-gray-400">Account</p>
           </div>
         </div>
         <div className="w-full bg-slate-200 border"></div>
         <div className="flex flex-col items-start gap-3">
-          <button className="hover:text-gray-500 flex items-center">
+          <button
+            onClick={() => setPage("DashBoard")}
+            className="hover:text-gray-500 flex items-center"
+          >
             {" "}
             <i className="text-lg">
               <AiOutlineBarChart />
             </i>{" "}
             Dashboard
           </button>
-          <button className="hover:text-gray-500 flex items-center">
-            {" "}
-            <i className="text-lg">
-              <AiFillWallet />
-            </i>
-            {""}
-            View Transctions
-          </button>
-          <button className="hover:text-gray-500 flex items-center">
-            {" "}
-            <i className="text-lg">
-              <MdLocalAtm />
-            </i>{" "}
-            Budget
-          </button>
-          <button className="hover:text-gray-500 flex items-center">
+          <button
+            onClick={() => setPage("Expenses")}
+            className="hover:text-gray-500 flex items-center"
+          >
             {" "}
             <i className="text-lg">
               <AiFillMinusSquare />
             </i>{" "}
             Expenses
           </button>
-          <button className="hover:text-gray-500 flex items-center">
+          <button
+            onClick={() => setPage("Income")}
+            className="hover:text-gray-500 flex items-center"
+          >
             {" "}
             <i className="text-lg">
               <AiFillPlusSquare />
@@ -72,13 +128,25 @@ const ProfilePage = () => {
           </button>
         </div>
 
-        <button onClick={handleLogOut} className="absolute bottom-5 left-2 hover:text-gray-500 flex items-center">
+        <button
+          onClick={handleLogOut}
+          className="absolute bottom-5 left-2 hover:text-gray-500 flex items-center"
+        >
           {" "}
           <i className="text-lg">
             <BiLogOut />
           </i>{" "}
           Sign Out
         </button>
+      </div>
+      <div className="w-full">
+        {page === "DashBoard" ? (
+          <DashBoard />
+        ) : page === "Expenses" ? (
+          <Record page={page} />
+        ) : (
+          <Record page={"Income"} />
+        )}
       </div>
     </main>
   );

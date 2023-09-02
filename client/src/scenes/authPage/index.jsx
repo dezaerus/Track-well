@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { loginSchema } from "./loginSchema.js";
 import { registerSchema } from "./registerSchema.js";
 import { useDispatch } from "react-redux";
-import { setLogin } from "state/index.js";
+import { setLogin } from "state";
 
 const AuthPage = () => {
   const [isLoginPage, setIsLoginPage] = useState(true);

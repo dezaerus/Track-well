@@ -68,16 +68,7 @@ const HomePage = () => {
             </p>
           </div>
         </div>
-        <div className="flex flex-col justify-start md:justify-center items-center md:flex-row gap-10">
-          <div className="w-[90vw] md:w-96 h-40 shadow-2xl rounded-lg order-2"></div>
-          <div className="order-1 w-full md:w-96">
-            <h3 className="text-2xl my-3">Painless budgeting</h3>
-            <p className="text-gray-500">
-              Manage your budgets easily and keep track of your spending. Create
-              a budget and see how much you have left.
-            </p>
-          </div>
-        </div>
+        
         <div className="flex flex-col justify-start md:justify-center items-center md:flex-row gap-10">
           <div className="w-[90vw] md:w-96 h-40 shadow-2xl rounded-lg order-2 md:order-1"></div>
           <div className="order-1 w-full md:w-96">

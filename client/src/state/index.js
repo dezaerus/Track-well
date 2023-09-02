@@ -4,8 +4,8 @@ const initialState = {
   id: null,
   user: null,
   token: null,
-  expenses: [],
-  incomes: [],
+  expenses: null,
+  incomes: null,
 };
 
 export const authSlice = createSlice({
@@ -24,33 +24,17 @@ export const authSlice = createSlice({
     },
     setExpenses: (state, action) => {
       if (state.user) {
-        state.user.expenses = action.payload.expenses;
+        state.expenses = action.payload.expenses;
       } else {
         console.log("user has no expenses :)");
       }
     },
     setIncomes: (state, action) => {
       if (state.user) {
-        state.user.incomes = action.payload.incomes;
+        state.incomes = action.payload.incomes;
       } else {
         console.log("user has no income :(");
       }
-    },
-    setExpense: (state, action) => {
-      const updatedExpenses = state.expenses.map((expense) => {
-        if (expense._id === action.payload.expense_id)
-          return action.payload.expense;
-        return expense;
-      });
-      state.expenses = updatedExpenses;
-    },
-    setIncome: (state, action) => {
-      const updatedIncomes = state.incomes.map((income) => {
-        if (income._id === action.payload.income_id)
-          return action.payload.income;
-        return income;
-      });
-      state.incomes = updatedIncomes;
     },
   },
 });
@@ -60,8 +44,6 @@ export const {
   setLogout,
   setExpenses,
   setIncomes,
-  setExpense,
-  setIncome,
 } = authSlice.actions;
 
-export default authSlice.reducer
+export default authSlice.reducer;

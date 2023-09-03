@@ -6,23 +6,20 @@ import { useNavigate } from "react-router-dom";
 const Navbar = ({ isTopOfPage }) => {
   const isNonMobileScreen = useMediaQuery("(min-width: 1060px)");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const color = isTopOfPage ? "bg-white text-black" : "bg-gray-300";
   const menuItems = ["Home", "About", "Login"];
   const navigate = useNavigate();
- 
+
   const handleMenuItemClick = (item) => {
     if (item === "Login") return navigate("/auth");
     setIsMenuOpen(false);
   };
 
-  const handleCLick = (item) => {
+  const handleCLick = () => {
     navigate("/auth");
   };
 
   return (
-    <div
-      className={`z-40 w-full fixed top-0 py-6 ${color}  transition duration-300`}
-    >
+    <div className="w-full fixed top-0 py-6 bg-gray-800 text-white">
       <div className="flex justify-between items-center w-5/6 md:w-4/6 mx-auto p-4 gap-6">
         <p className="text-2xl sm:text-3xl">Track Well</p>
         {isNonMobileScreen ? (
@@ -36,15 +33,15 @@ const Navbar = ({ isTopOfPage }) => {
 
             <button
               onClick={handleCLick}
-              className="hover:bg-gray-500 transition duration-150 py-2 px-4 bg-gray-400 rounded-xl"
+              className="hover:bg-blue-800 transition duration-150 py-2 px-4 rounded-xl bg-blue-500"
             >
               Login
             </button>
           </div>
         ) : (
-          <div className="relative">
+          <div className="relative text-black">
             <button
-              className="text-2xl"
+              className="text-2xl text-white"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? <FiX /> : <FiMenu />}

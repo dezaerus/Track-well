@@ -2,8 +2,6 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useSelector } from "react-redux";
 
-
-
 const categories = [
   "Food",
   "Transportation",
@@ -25,14 +23,13 @@ const ExpenseSchema = Yup.object().shape({
 });
 
 const ExpenseForm = () => {
- 
   const userId = useSelector((state) => state.id);
-  const token = useSelector((state) => state.token)
+  const token = useSelector((state) => state.token);
   const handleSubmit = async (values, actions) => {
     try {
       const formData = {
         ...values,
-        userId
+        userId,
       };
       const response = await fetch("http://localhost:3001/expenses", {
         method: "POST",
@@ -54,7 +51,6 @@ const ExpenseForm = () => {
       actions.setSubmitting(false);
     }
   };
-
 
   return (
     <div className="flex items-center justify-center h-screen bg-gray-100">
@@ -169,4 +165,4 @@ const ExpenseForm = () => {
   );
 };
 
-export default ExpenseForm
+export default ExpenseForm;

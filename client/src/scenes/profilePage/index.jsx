@@ -84,9 +84,9 @@ const ProfilePage = () => {
 
   return (
     <main className="flex justify-start h-screen w-screen gap-10">
-      <div className="flex flex-col items-center gap-4 bg-gray-800 py-8 px-6 text-white">
+      <aside className="flex flex-col items-start gap-4 bg-gray-800 py-8 px-6 text-white w-[250px]" id="aside">
         <div className="flex gap-2 items-center">
-          <i className="text-3xl text-gray-600 border-4 border-gray-400">
+          <i className="text-3xl text-gray-600">
             <BiUser />
           </i>
           <div>
@@ -94,36 +94,33 @@ const ProfilePage = () => {
             <p className="text-sm text-gray-400">Account</p>
           </div>
         </div>
-        <div className="w-full bg-slate-200 border"></div>
+        <hr className="w-full border-gray-600" />
         <div className="flex flex-col items-start gap-3">
           <button
             onClick={() => setPage("DashBoard")}
-            className="hover:text-gray-500 flex items-center"
+            className={`hover:text-gray-500 flex items-center ${page === 'DashBoard' ? 'text-gray-500' : ''}`}
           >
-            {" "}
             <i className="text-lg">
               <AiOutlineBarChart />
-            </i>{" "}
+            </i>
             Dashboard
           </button>
           <button
             onClick={() => setPage("Expenses")}
-            className="hover:text-gray-500 flex items-center"
+            className={`hover:text-gray-500 flex items-center ${page === 'Expenses' ? 'text-gray-500' : ''}`}
           >
-            {" "}
             <i className="text-lg">
               <AiFillMinusSquare />
-            </i>{" "}
+            </i>
             Expenses
           </button>
           <button
             onClick={() => setPage("Income")}
-            className="hover:text-gray-500 flex items-center"
+            className={`hover:text-gray-500 flex items-center ${page === 'Income' ? 'text-gray-500' : ''}`}
           >
-            {" "}
             <i className="text-lg">
               <AiFillPlusSquare />
-            </i>{" "}
+            </i>
             Income
           </button>
         </div>
@@ -132,14 +129,13 @@ const ProfilePage = () => {
           onClick={handleLogOut}
           className="absolute bottom-5 left-2 hover:text-gray-500 flex items-center"
         >
-          {" "}
           <i className="text-lg">
             <BiLogOut />
-          </i>{" "}
+          </i>
           Sign Out
         </button>
-      </div>
-      <div className="w-full">
+      </aside>
+      <div className="" id="board">
         {page === "DashBoard" ? (
           <DashBoard />
         ) : page === "Expenses" ? (

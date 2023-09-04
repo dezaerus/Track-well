@@ -48,7 +48,7 @@ const HomePage = () => {
 
       <section
         id="home"
-        className="flex flex-col mt-36 justify-center items-center px-4 gap-12"
+        className="flex flex-col mt-40 justify-center items-center px-4 gap-12"
       >
         <motion.div
           initial="hidden"
@@ -107,7 +107,7 @@ const HomePage = () => {
 
       <section
         id="about"
-        className="flex flex-col mt-10 mx-5 gap-16"
+        className="flex flex-col m-10 mx-5 gap-16"
         initial="hidden"
         animate="visible"
       >

@@ -15,12 +15,12 @@ const validationSchema = Yup.object().shape({
 
 const IncomeForm = () => {
   const userId = useSelector((state) => state.id);
-  const token = useSelector((state) => state.token)
+  const token = useSelector((state) => state.token);
   const handleSubmit = async (values, actions) => {
     try {
       const formData = {
         ...values,
-        userId
+        userId,
       };
       const response = await fetch("http://localhost:3001/income/", {
         method: "POST",

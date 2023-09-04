@@ -135,7 +135,7 @@ const ProfilePage = () => {
           Sign Out
         </button>
       </aside>
-      <div className="" id="board">
+      <div className="w-full" id="board">
         {page === "DashBoard" ? (
           <DashBoard />
         ) : page === "Expenses" ? (

@@ -32,21 +32,3 @@ export const getIncomes = async (req, res) => {
   }
 };
 
-
-/* DELETE */
-
-export const deleteIncome = async (req, res) => {
-  try {
-    const { incomeId } = req.params;
-
-    const deletedIncome = await Income.findByIdAndDelete(incomeId);
-
-    if (!deletedIncome) {
-      return res.status(404).json({ message: "Income not found" });
-    }
-
-    res.status(200).json({ message: "Income deleted successfully" });
-  } catch (error) {
-    res.status(400).json({ message: "Invalid income ID" });
-  }
-};

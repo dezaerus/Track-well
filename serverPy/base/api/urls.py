@@ -1,8 +1,7 @@
 from django.urls import path
 from . import views
 
-
 urlpatterns = [
-    path("", views.getRoutes),
-    path("login/", views.MyTokenObtainPairView.as_view(), name="token_obtain_pair"),
+    path('auth/register', views.register, name='register'),
+    path('auth/login', views.login, name='login'),
 ]

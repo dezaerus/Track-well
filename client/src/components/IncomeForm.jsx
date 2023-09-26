@@ -29,11 +29,11 @@ const IncomeForm = () => {
         ...values,
         userId,
       };
-      const response = await fetch("http://localhost:3001/income/", {
+      const response = await fetch("http://localhost:3001/income", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          Authorization: `Token ${token}`,
         },
         body: JSON.stringify(formData),
       });

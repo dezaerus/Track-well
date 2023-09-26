@@ -29,10 +29,10 @@ const ProfilePage = () => {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
+              Authorization: `Token ${token}`,
             },
           });
-
+        
           if (!response.ok) {
             throw new Error(`Failed to fetch ${key}`);
           }
@@ -44,7 +44,7 @@ const ProfilePage = () => {
               : setExpenses({ expenses: data })
           );
         };
-
+        
         await Promise.all([
           fetchIncomeAndExpense(
             `http://localhost:3001/income/${userId}`,
@@ -90,7 +90,7 @@ const ProfilePage = () => {
             <BiUser />
           </i>
           <div>
-            <p className="text-lg">{user}</p>
+            <p className="text-lg">{user.username}</p>
             <p className="text-sm text-gray-400">Account</p>
           </div>
         </div>

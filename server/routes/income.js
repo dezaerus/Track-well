@@ -13,6 +13,6 @@ router.get("/:userId", verifyToken, getIncomes);
 
 /* CREATE */
 
-router.post("/", verifyToken, createIncome);
+router.post("", verifyToken, createIncome);
 
 export default router;

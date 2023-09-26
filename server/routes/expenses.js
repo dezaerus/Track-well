@@ -12,6 +12,6 @@ router.get("/:userId", verifyToken, getExpenses);
 
 /* CREATE */
 
-router.post("/", verifyToken, createExpense);
+router.post("", verifyToken, createExpense);
 
 export default router;

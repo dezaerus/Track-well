@@ -9,13 +9,13 @@ class IncomeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Income
         fields = ["description", "amount", "category", "date"]
-   
+
 
 class ExpenseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Expense
         fields = ["description", "amount", "category", "date"]
-   
+
 
 class UserSerializer(serializers.ModelSerializer):
     income = IncomeSerializer(many=True, read_only=True)

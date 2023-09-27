@@ -8,11 +8,13 @@ import {
 } from "react-icons/ai";
 import { setLogout, setExpenses, setIncomes } from "state";
 import { useNavigate } from "react-router-dom";
+import useMediaQuery from "hooks/useMediaQurey";
 import DashBoard from "scenes/profilePage/DashBoard";
 import Record from "scenes/profilePage/Record";
 
 const ProfilePage = () => {
   const isDataFetched = useRef(false);
+  const isMobile = useMediaQuery("(max-width: 1060px)");
   const user = useSelector((state) => state.user);
   const userId = useSelector((state) => state.id);
   const [page, setPage] = useState("DashBoard");
@@ -32,7 +34,7 @@ const ProfilePage = () => {
               Authorization: `Token ${token}`,
             },
           });
-        
+
           if (!response.ok) {
             throw new Error(`Failed to fetch ${key}`);
           }
@@ -44,7 +46,7 @@ const ProfilePage = () => {
               : setExpenses({ expenses: data })
           );
         };
-        
+
         await Promise.all([
           fetchIncomeAndExpense(
             `http://localhost:3001/income/${userId}`,
@@ -83,8 +85,15 @@ const ProfilePage = () => {
   }
 
   return (
-    <main className="flex justify-start h-screen w-screen gap-10">
-      <aside className="flex flex-col items-start gap-4 bg-gray-800 py-8 px-6 text-white w-[250px]" id="aside">
+    <main
+      className={`flex ${isMobile ? "flex-col" : "flex-row"} h-screen gap-10`}
+    >
+      <aside
+        className={`${
+          isMobile ? "w-full" : "w-[250px]"
+        } flex flex-col items-start gap-4 bg-gray-800 py-8 px-6 text-white`}
+        id="aside"
+      >
         <div className="flex gap-2 items-center">
           <i className="text-3xl text-gray-600">
             <BiUser />
@@ -98,7 +107,9 @@ const ProfilePage = () => {
         <div className="flex flex-col items-start gap-3">
           <button
             onClick={() => setPage("DashBoard")}
-            className={`hover:text-gray-500 flex items-center ${page === 'DashBoard' ? 'text-gray-500' : ''}`}
+            className={`hover:text-gray-500 flex items-center ${
+              page === "DashBoard" ? "text-gray-500" : ""
+            }`}
           >
             <i className="text-lg">
               <AiOutlineBarChart />
@@ -107,7 +118,9 @@ const ProfilePage = () => {
           </button>
           <button
             onClick={() => setPage("Expenses")}
-            className={`hover:text-gray-500 flex items-center ${page === 'Expenses' ? 'text-gray-500' : ''}`}
+            className={`hover:text-gray-500 flex items-center ${
+              page === "Expenses" ? "text-gray-500" : ""
+            }`}
           >
             <i className="text-lg">
               <AiFillMinusSquare />
@@ -116,24 +129,25 @@ const ProfilePage = () => {
           </button>
           <button
             onClick={() => setPage("Income")}
-            className={`hover:text-gray-500 flex items-center ${page === 'Income' ? 'text-gray-500' : ''}`}
+            className={`hover:text-gray-500 flex items-center ${
+              page === "Income" ? "text-gray-500" : ""
+            }`}
           >
             <i className="text-lg">
               <AiFillPlusSquare />
             </i>
             Income
           </button>
+          <button
+            onClick={handleLogOut}
+            className="hover:text-gray-500 flex items-center"
+          >
+            <i className="text-lg">
+              <BiLogOut />
+            </i>
+            Sign Out
+          </button>
         </div>
-
-        <button
-          onClick={handleLogOut}
-          className="absolute bottom-5 left-2 hover:text-gray-500 flex items-center"
-        >
-          <i className="text-lg">
-            <BiLogOut />
-          </i>
-          Sign Out
-        </button>
       </aside>
       <div className="w-full" id="board">
         {page === "DashBoard" ? (

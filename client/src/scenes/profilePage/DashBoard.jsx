@@ -2,10 +2,12 @@ import emailjs from "emailjs-com";
 import { useSelector } from "react-redux";
 import { Line, Pie } from "react-chartjs-2";
 import { saveAs } from "file-saver";
+import useMediaQuery from "hooks/useMediaQurey";
 import { Chart } from "chart.js/auto";
 import * as XLSX from "xlsx/xlsx.mjs";
 
 const Dashboard = () => {
+  const isMobile = useMediaQuery("(max-width: 768px)");
   const incomes = useSelector((state) => state.incomes);
   const expenses = useSelector((state) => state.expenses);
 
@@ -152,72 +154,81 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="flex flex-col p-10">
-      <div className="flex justify-end mt-2 gap-4">
-        <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          onClick={() => sendToEmail("recipient@example.com")}
-        >
-          Send via Email
-        </button>
-        <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          onClick={downloadExcel}
-        >
-          Download Excel
-        </button>
-      </div>
-
-      <div className="flex gap-44 mt-4">
-        <div className="flex flex-col gap-5 border-1 rounded-xl shadow-xl p-5">
-          <h2 className="text-2xl">Financial Overview</h2>
-          <div className="w-[700px] h-[300px]">
-            <Line data={chartData} options={chartOptions} />
-          </div>
+    <div
+      className={
+        isMobile
+          ? "p-10 flex flex-col gap-6 items-center justify-center"
+          : "grid grid-cols-1 md:grid-cols-2 gap-2 p-5 md:p-10"
+      }
+    >
+      <div className="flex flex-col gap-2">
+        <div className="flex flex-col justify-center mt-2 gap-4">
+          <button
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            onClick={() => sendToEmail("recipient@example.com")}
+          >
+            Send via Email
+          </button>
+          <button
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            onClick={downloadExcel}
+          >
+            Download Excel
+          </button>
         </div>
-
-        <div className="border-1 rounded-xl shadow-xl p-5 w-[500px]">
-          <h2 className="text-lg font-semibold mb-4">Recent Transactions</h2>
-          <div className="space-y-2">
-            <h1>Income</h1>
-            <ul>
-              {incomes.map((income) => (
-                <li key={income._id} className="text-green-600">
-                  <span>+ </span> {income.description} - ${income.amount}{" "}
-                  <span className="text-gray-500 px-1">
-                    ({formatDate(income.date)})
-                  </span>
-                </li>
-              ))}
-            </ul>
-            <h1>Expenses</h1>
-            <ul>
-              {expenses.map((expense) => (
-                <li key={expense._id} className="text-red-600">
-                  <span>- </span>
-                  {expense.description} - ${expense.amount}{" "}
-                  <span className="text-gray-500 px-1">
-                    ({formatDate(expense.date)})
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
+        <div className="mt-4 w-full h-[250px] justify-center flex">
+          <Pie data={pieData} />
         </div>
       </div>
-      <div className="flex gap-44">
-        <div className="flex flex-col border-1 rounded-xl shadow-xl p-5 mt-12 gap-5 w-[750px]">
-          <p className="text-2xl text-green-500">
-            Total Income: + ${totalIncome}
-          </p>
-          <p className="text-2xl text-red-500">
-            Total Expenses: - ${totalExpenses}
-          </p>
-          <p className="text-2xl">Total: {totalIncome - totalExpenses}</p>
+
+      <div className="border-1 rounded-xl shadow-xl p-3 md:p-5">
+        <h2 className="text-xl md:text-2xl">Financial Overview</h2>
+        <div className="flex items-center justify-center  w-[300px] h-[200px] sm:w-full md:h-[400px] md:w-full">
+          <Line data={chartData} options={chartOptions} />
         </div>
-        <div className="mt-12 w-[400px] h-[250px]">
-          <Pie data={pieData} options={{ maintainAspectRatio: false }} />
+      </div>
+
+      <div className="border-1 rounded-xl shadow-xl p-3 md:p-5">
+        <h2 className="text-lg md:text-xl font-semibold mb-2 md:mb-4">
+          Recent Transactions
+        </h2>
+        <div className="space-y-2">
+          <h1>Income</h1>
+          <ul>
+            {incomes.map((income) => (
+              <li key={income._id} className="text-green-600">
+                <span>+ </span> {income.description} - ${income.amount}{" "}
+                <span className="text-gray-500 px-1">
+                  ({formatDate(income.date)})
+                </span>
+              </li>
+            ))}
+          </ul>
+          <h1>Expenses</h1>
+          <ul>
+            {expenses.map((expense) => (
+              <li key={expense._id} className="text-red-600">
+                <span>- </span>
+                {expense.description} - ${expense.amount}{" "}
+                <span className="text-gray-500 px-1">
+                  ({formatDate(expense.date)})
+                </span>
+              </li>
+            ))}
+          </ul>
         </div>
+      </div>
+
+      <div className="border-1 rounded-xl shadow-xl p-3 md:p-5">
+        <p className="text-xl md:text-2xl text-green-500">
+          Total Income: + ${totalIncome}
+        </p>
+        <p className="text-xl md:text-2xl text-red-500">
+          Total Expenses: - ${totalExpenses}
+        </p>
+        <p className="text-xl md:text-2xl">
+          Total: {totalIncome - totalExpenses}
+        </p>
       </div>
     </div>
   );

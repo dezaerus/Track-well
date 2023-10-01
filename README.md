@@ -1,19 +1,13 @@
 # Track-Well: Personal Finance Tracker
 
-Track-Well is a straightforward personal finance tracker designed to help you manage your expenses and income conveniently. It provides a user-friendly web interface built with React.js, React Icons, Chart.js, and Tailwind CSS for the frontend. The backend, powered by Node.js and Express, offers Cross-Origin Resource Sharing (CORS) support. User authentication is handled securely through JSON Web Tokens (JWT), and data is stored efficiently using Mongoose, a MongoDB object modeling library.
+Track-Well is a user-friendly personal finance tracker with a sleek React.js frontend, utilizing both MERN (MongoDB, Express, React, Node.js) or Django with a RESTful API and JWT for flexibility. Secure user authentication is ensured with JSON Web Tokens. The platform offers a dynamic and adaptable solution for managing expenses and income.
 
 ## Table of Contents
 
 - [Overview](#overview)
+- [Sample ScreenShots](#sample-screenshots)
 - [Frontend Technologies](#frontend-technologies)
 - [Backend Technologies](#backend-technologies)
-- [Prerequisites](#prerequisites)
-- [Installation](#installation)
-- [Getting Started](#getting-started)
-- [Environment Variables](#environment-variables)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Overview
 
@@ -24,6 +18,12 @@ Track-Well empowers you to:
 - Securely authenticate using JWT.
 - Utilize a simple and intuitive web interface.
 
+## Sample ScreenShots
+![LandingPage](https://github.com/dezaerus/Track-well/blob/main/pics/Screenshot%20(23).png?raw=true)
+![DashBoardPage](https://github.com/dezaerus/Track-well/blob/main/pics/Screenshot%20(26).png?raw=true)
+![MobileView](https://github.com/dezaerus/Track-well/blob/main/pics/Screenshot%20(29).png?raw=true)
+![MobileView](https://github.com/dezaerus/Track-well/blob/main/pics/Screenshot%20(25).png?raw=true)
+
 ## Frontend Technologies
 
 - **Tech Stack**:
@@ -31,31 +31,14 @@ Track-Well empowers you to:
   - React Icons
   - Chart.js
   - Tailwind CSS
-
-- **Getting Started**:
-  - To run the frontend, navigate to the "client" directory and execute `npm install` followed by `npm start`.
-
+    
 ## Backend Technologies
 
-- **Tech Stack**:
-  - Node.js
+- ## NodeJs
   - Express
   - MongoDB (with Mongoose)
   - JWT (JSON Web Tokens)
-
-- **Getting Started**:
-  - To run the backend, navigate to the "server" directory, run `npm install`, and then execute `node app.js`.
-
-## Prerequisites
-
-Before you begin, ensure you have met the following requirements:
-
-- **Node.js**: Make sure you have Node.js installed on your machine. You can download it from [nodejs.org](https://nodejs.org/).
-- **MongoDB**: You will need a MongoDB database. You can set up a local MongoDB instance or use a cloud-based solution like MongoDB Atlas.
-
-## Installation
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/track-well.git
-
+- ## Django
+  - RESTful Api
+  - JWT
+  - Sql

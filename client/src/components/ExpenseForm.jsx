@@ -59,8 +59,8 @@ const ExpenseForm = () => {
     }
   };
   return (
-    <div className="flex justify-center items-center min-h-screen">
-      <div className="w-1/2 p-4">
+    <div className="flex flex-col justify-center items-center min-h-screen md:flex-row">
+      <div className="p-4 md:w-1/2">
         <h1 className="text-3xl font-bold mb-4">Expense Form</h1>
         <div className="bg-white rounded-lg shadow-lg p-6">
           <Formik

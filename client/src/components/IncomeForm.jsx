@@ -50,9 +50,8 @@ const IncomeForm = () => {
     }
   };
   return (
-
-    <div className="flex justify-center items-center min-h-screen">
-      <div className="w-1/2 p-4">
+    <div className="flex flex-col justify-center items-center min-h-screen md:flex-row">
+      <div className="p-4 md:w-1/2">
         <h1 className="text-3xl font-bold mb-4">Income</h1>
         <div className="bg-white rounded-lg shadow-lg p-6">
           <Formik
@@ -179,7 +178,7 @@ const IncomeForm = () => {
               </div>
               <div className="flex items-center">
                 <span className="text-xl font-semibold text-green-600">
-                 + ${income.amount}
+                  + ${income.amount}
                 </span>
                 <span className="ml-2 text-gray-600">
                   Category: {income.category}

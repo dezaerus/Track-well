@@ -11,9 +11,9 @@ const Dashboard = () => {
   const incomes = useSelector((state) => state.incomes);
   const expenses = useSelector((state) => state.expenses);
 
-  const incomeAmounts = incomes.map((income) => income.amount);
-  const expenseAmounts = expenses.map((expense) => expense.amount);
-
+  const incomeAmounts = incomes.map((income) => Number(income.amount));
+  const expenseAmounts = expenses.map((expense) => Number(expense.amount));
+  
   const formatDate = (timestamp) => {
     const dateObj = new Date(timestamp);
     return dateObj.toISOString().split("T")[0];
